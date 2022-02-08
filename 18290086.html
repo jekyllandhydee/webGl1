@@ -1,0 +1,81 @@
+<html>
+  <body>
+    <div>
+	<h1>ELİF ÇAKALOĞLU/18290086</h1>
+      <button
+        id="Stop_Rotation_Button"
+        style="margin-left: 150px; margin-top: 10px;"       
+      >
+        Start / Stop Rotating
+      </button>
+      <button
+        id="Direction_Button"
+        style="margin-left: 20px;"    
+      >
+        Change Direction
+      </button>
+      
+    </div>
+    <canvas id="glcanvas" width="512" height="512"> </canvas>
+    <select id="mymenu" size="4">
+      <option value="0">Black</option>
+      <option value="1">Blue</option>
+      <option value="2">Green</option>
+      <option value="3">Red</option>
+      </select>
+    <div>
+      
+      <div>
+        translate x 0
+        <input id="tsliderx" type="range" min="0" max="10" step="1" value="0" />
+        5
+      </div>
+
+      <div>
+        translate y 0
+        <input id="tslidery" type="range" min="0" max="10" step="1" value="0" />
+        5
+      </div>
+      <div>
+        <div>
+          speed 0
+          <input
+            id="slide"
+            type="range"
+            min="0"
+            max="1000"
+            step="10"
+            value="500"
+          />
+          100
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script id="vertex-shader" type="x-shader/x-vertex">
+     attribute vec4 vPosition;
+     uniform float theta;
+     uniform float translatex;//+
+    uniform float translatey;//+
+     void main(){
+      gl_Position.x = (cos(theta) * vPosition.x -sin(theta) * vPosition.y)+translatex;
+      gl_Position.y = (sin(theta) * vPosition.x +cos(theta) * vPosition.y)+translatey;
+      gl_Position.z = 0.0;
+      gl_Position.w = 1.0;
+
+     }
+  </script>
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 color;
+
+    void main() {
+       gl_FragColor = color;
+    }
+  </script>
+    <script src="./18290086.js"></script>
+  <script src="./common/initShaders.js"></script>
+  <script src="./common/webgl-utils.js"></script>
+  <script src="./common/MV.js"></script>
+</html>
